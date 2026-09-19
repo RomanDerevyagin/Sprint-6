@@ -13,38 +13,16 @@ public class HomePage {
     private By orderMid = By.cssSelector(".Button_Button__ra12g.Button_Middle__1CSJM");
     // Блок вопросов о важном
     private By block = By.cssSelector(".Home_FAQ__3uVm4");
-    // Первый вопрос о важном
-    private By firstQuestion = By.id("accordion__heading-0");
-    // Первый ответ
-    private By firstAnswer = By.id("accordion__panel-0");
-    // Второй вопрос о важном
-    private By secondQuestion = By.id("accordion__heading-1");
-    // Второй ответ
-    private By secondAnswer = By.id("accordion__panel-1");
-    // Третий вопрос о важном
-    private By thirdQuestion = By.id("accordion__heading-2");
-    // Третий ответ
-    private By thirdAnswer = By.id("accordion__panel-2");
-    // Четвертый вопрос о важном
-    private By fourthQuestion = By.id("accordion__heading-3");
-    // Четвертый ответ
-    private By fourthAnswer = By.id("accordion__panel-3");
-    // Пятый вопрос о важном
-    private By fifthQuestion = By.id("accordion__heading-4");
-    // Пятый ответ
-    private By fifthAnswer = By.id("accordion__panel-4");
-    // Шестой вопрос о важном
-    private By sixQuestion = By.id("accordion__heading-5");
-    // Шестой ответ
-    private By sixAnswer = By.id("accordion__panel-5");
-    // Седьмой вопрос о важном
-    private By sevenQuestion = By.id("accordion__heading-6");
-    // Седьмой ответ
-    private By sevenAnswer = By.id("accordion__panel-6");
-    // Восьмой вопрос о важном
-    private By eightQuestion = By.id("accordion__heading-7");
-    // Восьмой ответ
-    private By eighthAnswer = By.id("accordion__panel-7");
+    // Вопросы
+    public void clickQuestion(int index){
+        By question = By.id("accordion__heading-" + index);
+        driver.findElement(question).click();
+    }
+    // Ответы
+    public String getAnswerText(int index){
+        By answer = By.id("accordion__panel-" + index);
+        return driver.findElement(answer).getText();
+    }
     // Кнопка про куки
     private By cookie = By.id("rcc-confirm-button");
 
@@ -65,35 +43,5 @@ public class HomePage {
         ((JavascriptExecutor) driver).executeScript(
                 "arguments[0].scrollIntoView(true);", header
         );
-    }
-    public void clickFirst(){
-        driver.findElement(firstQuestion).click();
-    }
-    public String textFirst(){
-        return driver.findElement(firstAnswer).getText();
-    }
-    public void clickSecond(){
-        driver.findElement(secondQuestion).click();
-    }
-    public String textSecond(){
-        return driver.findElement(secondAnswer).getText();
-    }
-    public void clickThird(){
-        driver.findElement(thirdQuestion).click();
-    }
-    public void clickFourth(){
-        driver.findElement(fourthQuestion).click();
-    }
-    public void clickFifth(){
-        driver.findElement(fifthQuestion).click();
-    }
-    public void clickSix(){
-        driver.findElement(sixQuestion).click();
-    }
-    public void clickSeven(){
-        driver.findElement(sevenQuestion).click();
-    }
-    public void clickEight(){
-        driver.findElement(eightQuestion).click();
     }
 }

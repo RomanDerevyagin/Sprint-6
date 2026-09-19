@@ -17,6 +17,8 @@ public class OrderPage {
     private By address = By.cssSelector("input[placeholder='* Адрес: куда привезти заказ']");
     // Поле Метро
     private By metro = By.cssSelector("input[placeholder='* Станция метро']");
+    // Окно с выбором метро
+    private  By metroPage = By.cssSelector(".select-search__select");
     // Поле телефон
     private By phone = By.cssSelector("input[placeholder='* Телефон: на него позвонит курьер']");
     // Кнопка далее
@@ -41,68 +43,63 @@ public class OrderPage {
     public OrderPage(WebDriver driver){
         this.driver = driver;
     }
-    public void clickAndSendName(String username){
+    public void OrderBase(String username, String secondName, String add, String number , String calendar){
+        // Заполнение имени
+        new WebDriverWait(driver, Duration.ofSeconds(15))
+                .until(ExpectedConditions.visibilityOfElementLocated(
+                        name
+                ));
         driver.findElement(name).click();
         driver.findElement(name).sendKeys(username);
-    }
-    public void clickAndSendSurname(String secondName){
+        //Заполнение фамилии
         driver.findElement(surname).click();
         driver.findElement(surname).sendKeys(secondName);
-    }
-    public void clickAndSendAddress(String add){
+        // Заполнение адреса
         driver.findElement(address).click();
         driver.findElement(address).sendKeys(add);
-    }
-    public void clickMetro(){
+        // Заполнение метро
         driver.findElement(metro).click();
-    }
-    public void waitForMetroList() {
         new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.visibilityOfElementLocated(
-                        By.cssSelector(".select-search__select")
+                        metroPage
                 ));
-    }
-    public void sendMetro(){
         driver.findElement(sokolniki).click();
-    }
-    public void clickAndSendPhone(String number){
+        //  Заполнение номера телефона
         driver.findElement(phone).click();
         driver.findElement(phone).sendKeys(number);
-    }
-    public void clickNext(){
+        // Кнопка далее
         driver.findElement(next).click();
-    }
-    public void clickAndSendDate(String calendar){
+        // Заполнение даты
+        new WebDriverWait(driver, Duration.ofSeconds(15))
+                .until(ExpectedConditions.visibilityOfElementLocated(
+                        date
+                ));
         driver.findElement(date).click();
         driver.findElement(date).sendKeys(calendar);
         driver.findElement(date).sendKeys(Keys.ENTER);
-    }
-    public void clickRental(){
-        driver.findElement(rentalPeriod).click();
-    }
-    public void clickRental1(){
-        driver.findElement(rentalPeriod1).click();
-    }
-    public void clickColor(){
-        driver.findElement(color).click();
-    }
-    public void clickFinish(){
-        driver.findElement(finish).click();
-    }
-    public void waitYes() {
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.elementToBeClickable(
-                        By.xpath("//button[text()='Да']")
-                ));
-    }
-    public void clickYes(){
-        driver.findElement(yes).click();
-    }
-    public void waitForFinalScreen() {
+        // Заполение срока аренды
         new WebDriverWait(driver, Duration.ofSeconds(15))
                 .until(ExpectedConditions.visibilityOfElementLocated(
-                        By.className("Order_ModalHeader__3FDaJ")
+                        rentalPeriod
                 ));
+        driver.findElement(rentalPeriod).click();
+        driver.findElement(rentalPeriod1).click();
+        // Заполенение цвета
+        driver.findElement(color).click();
+        // клик по кнопке заказать
+        driver.findElement(finish).click();
+        // ожидание и клик по кнопке да
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.elementToBeClickable(
+                        yes
+                ));
+        driver.findElement(yes).click();
+        // ожидание финального экрана
+        new WebDriverWait(driver, Duration.ofSeconds(15))
+                .until(ExpectedConditions.visibilityOfElementLocated(
+                        successScreen
+                ));
+
     }
     public String finalText(){
         return driver.findElement(successScreen).getText();
