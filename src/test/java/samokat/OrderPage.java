@@ -43,7 +43,7 @@ public class OrderPage {
     public OrderPage(WebDriver driver){
         this.driver = driver;
     }
-    public void OrderBase(String username, String secondName, String add, String number , String calendar){
+    public void orderBase(String username, String secondName, String add, String number , String calendar){
         // Заполнение имени
         new WebDriverWait(driver, Duration.ofSeconds(15))
                 .until(ExpectedConditions.visibilityOfElementLocated(

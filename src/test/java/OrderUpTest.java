@@ -22,7 +22,7 @@ public class OrderUpTest extends BaseTest {
         HomePage hp = new HomePage(driver);
         hp.clickCookie();
         hp.clickUp();
-        op.OrderBase(name,surname,address,phone,date);
+        op.orderBase(name,surname,address,phone,date);
         String screen = op.finalText();
         assertTrue(screen.contains("Номер заказа"));
     }
